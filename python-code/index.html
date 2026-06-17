@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spinning Wheel</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      margin-top: 50px;
+    }
+
+    #wheel {
+      margin: auto;
+      width: 300px;
+      height: 300px;
+      border: 10px solid #333;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sector {
+      width: 50%;
+      height: 50%;
+      position: absolute;
+      transform-origin: 100% 100%;
+      background-color: tomato;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+    }
+
+    #pointer {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 40px solid #333;
+      margin: 20px auto;
+    }
+
+    #spinBtn {
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div id="pointer"></div>
+  <div id="wheel"></div>
+  <br>
+  <button id="spinBtn">Spin</button>
+
+  <script>
+    const sectors = ["Prize 1", "Prize 2", "Prize 3", "Prize 4", "Prize 5", "Prize 6"];
+    const colors = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"];
+
+    const wheel = document.getElementById("wheel");
+
+    // Create sectors
+    sectors.forEach((label, i) => {
+      const sector = document.createElement("div");
+      const angle = (360 / sectors.length) * i;
+      sector.className = "sector";
+      sector.style.transform = `rotate(${angle}deg)`;
+      sector.style.backgroundColor = colors[i % colors.length];
+      sector.innerHTML = `<span style="position:absolute; right:10px; bottom:10px; transform:rotate(-${angle}deg); color:white;">${label}</span>`;
+      wheel.appendChild(sector);
+    });
+
+    let deg = 0;
+    document.getElementById("spinBtn").onclick = function () {
+      const min = 360; // at least one full spin
+      const max = 360 * 6; // up to 6 spins
+      const spinDeg = Math.floor(Math.random() * (max - min) + min);
+      deg += spinDeg;
+      wheel.style.transition = "transform 4s ease-out";
+      wheel.style.transform = `rotate(${deg}deg)`;
+    };
+  </script>
+</body>
+</html>

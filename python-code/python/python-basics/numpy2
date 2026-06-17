@@ -1,0 +1,25 @@
+import numpy as np
+
+arr_2x3 = np.array([[1, 2, 3], [4, 5, 6]]) # Shape (2, 3)
+scalar = 10                                 # Shape ()
+
+# Adding a scalar to an array
+print("Array + Scalar:\n", arr_2x3 + scalar)
+# Scalar 10 is "broadcast" to become [[10,10,10], [10,10,10]] and then added element-wise.
+print("-" * 30)
+
+vector_row = np.array([100, 200, 300]) # Shape (3,)
+# Adding a row vector to a 2D array
+print("Array + Row Vector:\n", arr_2x3 + vector_row)
+# Vector_row is broadcast along the rows to match the 2D array's shape.
+# [[1,2,3] + [100,200,300]]
+# [[4,5,6] + [100,200,300]]
+print("-" * 30)
+
+vector_col = np.array([[10], [20]]) # Shape (2, 1)
+# Adding a column vector to a 2D array
+print("Array + Column Vector:\n", arr_2x3 + vector_col)
+# Vector_col is broadcast along the columns to match the 2D array's shape.
+# [[1,2,3] + [10,10,10]]
+# [[4,5,6] + [20,20,20]]
+print("-" * 30)
