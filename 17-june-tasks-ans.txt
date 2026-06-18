@@ -1,0 +1,273 @@
+
+ CSV to Parquet Data Processing
+
+ Dataset
+
+Create a file named `employees.csv`
+
+
+id,name,department,salary,experience
+1,John,IT,50000,2
+2,Alice,HR,45000,3
+3,Bob,IT,70000,5
+4,David,Finance,60000,4
+5,Eva,IT,80000,7
+6,Mary,HR,55000,6
+
+
+
+ Task 1: Read CSV (10 mins)
+
+Read the CSV file and display:
+
+* First 5 records
+* Column names
+* Number of rows and columns
+
+Expected concepts:
+
+* `pd.read_csv()`
+* `head()`
+* `columns`
+* `shape`
+
+---
+
+ Task 2: Data Analysis (10 mins)
+
+Find:
+
+1. Average salary
+2. Maximum salary
+3. Minimum salary
+4. Number of employees in IT department
+
+Expected concepts:
+
+python
+mean()
+max()
+min()
+value_counts()
+
+
+---
+
+ Task 3: Filtering (10 mins)
+
+Display:
+
+1. Employees with salary greater than 60000
+2. Employees from IT department
+3. Employees having experience greater than 4 years
+
+Expected concepts:
+
+python
+df[df["salary"] > 60000]
+
+
+---
+
+ Task 4: Create New Column (10 mins)
+
+Add a column:
+
+text
+salary_category
+
+
+Rules:
+
+* salary < 50000 → Low
+* 50000 to 70000 → Medium
+* > 70000 → High
+
+Expected Output:
+
+| name | salary | salary_category |
+| ---- | ------ | --------------- |
+| John | 50000  | Medium          |
+| Eva  | 80000  | High            |
+
+---
+
+ Task 5: Convert CSV to Parquet (10 mins)
+
+Install:
+
+bash
+pip install pyarrow
+
+
+Convert CSV to Parquet.
+
+python
+df.to_parquet("employees.parquet")
+
+
+---
+
+ Task 6: Read Parquet and Verify (10 mins)
+
+Read the Parquet file.
+
+python
+df = pd.read_parquet("employees.parquet")
+
+
+Display:
+
+* Total rows
+* Total columns
+* First 3 records
+
+---
+
+ Bonus Task (Advanced)
+
+Group employees by department and calculate:
+
+* Average salary
+* Maximum salary
+
+Expected Output:
+
+text
+Department   Avg Salary
+HR           50000
+IT           66666
+Finance      60000
+
+
+Concept:
+
+python
+df.groupby("department")["salary"].mean()
+
+
+
+Here are 5 additional Parquet + Pandas tasks suitable for practice:
+
+ Task 1: Department-wise Employee Count
+
+Read the Parquet file and display the number of employees in each department.
+
+Expected Output:
+
+
+IT         3
+HR         2
+Finance    1
+
+
+Concepts:
+
+
+value_counts()
+groupby()
+size()
+
+
+---
+
+ Task 2: Top 3 Highest Paid Employees
+
+Read the Parquet file and display the top 3 employees based on salary.
+
+Expected Output:
+
+
+Eva      80000
+Bob      70000
+David    60000
+
+
+Concepts:
+
+
+sort_values()
+head()
+
+
+---
+
+ Task 3: Update Salaries
+
+Give a 10% salary hike to employees with more than 5 years of experience.
+
+Create a new column:
+
+
+updated_salary
+
+
+Concepts:
+
+
+loc[]
+apply()
+
+
+---
+
+ Task 4: Find Missing Values
+
+Create a dataset with some missing values and:
+
+1. Count missing values in each column.
+2. Replace missing salary with average salary.
+3. Save the cleaned data to a new Parquet file.
+
+Concepts:
+
+
+isnull()
+fillna()
+mean()
+
+
+---
+
+ Task 5: Department Report Generation
+
+Generate a summary report from the Parquet file:
+
+| Department | Employee Count | Avg Salary | Max Salary |
+| ---------- | -------------- | ---------- | ---------- |
+| IT         | 3              | 66666      | 80000      |
+| HR         | 2              | 50000      | 55000      |
+
+Save the report as:
+
+
+department_report.parquet
+
+
+Concepts:
+
+
+groupby()
+agg()
+to_parquet()
+
+
+# Challenge Task
+
+Using the Parquet file, answer:
+
+1. Who has the highest salary?
+2. Which department has the highest average salary?
+3. How many employees earn above the average salary?
+4. What is the total salary expense of the company?
+5. Which employee has the most experience?
+
+This combines:
+
+* Filtering
+* Aggregation
+* Sorting
+* Parquet read/write
+* Business reporting
+ 
+

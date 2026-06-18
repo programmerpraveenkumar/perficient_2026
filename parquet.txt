@@ -1,0 +1,126 @@
+
+
+
+
+ What is Parquet?
+
+Apache Parquet is a columnar storage file format used for storing large datasets efficiently.
+
+ CSV → stores data row by row
+ Parquet → stores data column by column
+
+This makes Parquet:
+
+ Faster for analytics
+ Smaller file size (compressed)
+ Supported by Python, Java, Spark, Hadoop, etc.
+
+ Read Parquet using Pandas
+
+
+import pandas as pd
+
+df = pd.read_parquet("employees.parquet")
+
+print(df.head())
+
+
+ Write Parquet using Pandas
+
+
+import pandas as pd
+
+data = {
+    "name": ["John", "Alice"],
+    "age": [25, 30]
+}
+
+df = pd.DataFrame(data)
+
+df.to_parquet("employees.parquet")
+
+
+ Required Libraries
+
+Install one of these engines:
+
+bash
+pip install pyarrow
+
+
+or
+
+bash
+pip install fastparquet
+
+
+ Using PyArrow Directly
+
+
+import pyarrow.parquet as pq
+
+table = pq.read_table("employees.parquet")
+df = table.to_pandas()
+
+print(df)
+
+
+ CSV vs Parquet
+
+| Feature        | CSV    | Parquet   |
+| -------------- | ------ | --------- |
+| Human readable | Yes    | No        |
+| Compression    | No     | Yes       |
+| Storage Size   | Large  | Small     |
+| Read Speed     | Slower | Faster    |
+| Column-based   | No     | Yes       |
+| Spark Support  | Yes    | Excellent |
+
+ Can Java Read Parquet?
+
+Yes. Parquet is not a Python-specific format. It can be read by:
+
+ Java
+ Apache Spark
+ Hadoop
+ Python (Pandas, PyArrow)
+ Databricks
+
+ Convert CSV to Parquet
+
+
+import pandas as pd
+
+df = pd.read_csv("employees.csv")
+df.to_parquet("employees.parquet")
+
+
+So, Parquet is a file format, not a Python library. In Python, you typically use Pandas + PyArrow to work with Parquet files.
+
+
+Workflow:
+
+CSV Files
+    ↓
+Read using Pandas
+    ↓
+Data Cleaning
+    ↓
+Data Transformation
+    ↓
+Convert to Parquet
+    ↓
+Store in Data Lake / S3
+    ↓
+Read using Spark / Pandas
+    ↓
+Analytics & Reporting
+
+
+| Library     | Purpose              |
+| ----------- | -------------------- |
+| Pandas      | Read/Write Parquet   |
+| PyArrow     | Fast Parquet engine  |
+| FastParquet | Alternative engine   |
+| PySpark     | Big Data processing  |
+| DuckDB      | SQL on Parquet files |

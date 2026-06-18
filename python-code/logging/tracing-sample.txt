@@ -1,0 +1,136 @@
+ 1. Log Levels in Python
+
+ Python uses the built-in `logging` module.
+
+ | Level    | Purpose                                        |
+ | -------- | ---------------------------------------------- |
+ | DEBUG    | Detailed information for developers            |
+ | INFO     | General application events                     |
+ | WARNING  | Something unexpected but application continues |
+ | ERROR    | An operation failed                            |
+ | CRITICAL | Serious error, application may stop            |
+
+
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
+logging.debug("Debug message")
+logging.info("Application started")
+logging.warning("Low disk space")
+logging.error("Database connection failed")
+logging.critical("System crashed")
+
+
+ DEBUG:root:Debug message
+ INFO:root:Application started
+ WARNING:root:Low disk space
+ ERROR:root:Database connection failed
+ CRITICAL:root:System crashed
+
+
+ 2. try-except
+
+Used to handle exceptions and prevent application crashes.
+
+
+try:
+    num = int(input("Enter number: "))
+    result = 10 / num
+    print(result)
+
+except ValueError:
+    print("Please enter a valid number")
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+except Exception as e:
+    print("Unknown Error:", e)
+```
+
+Using `finally`:
+
+```python
+try:
+    file = open("test.txt")
+except FileNotFoundError:
+    print("File not found")
+finally:
+    print("Execution completed")
+
+
+---
+
+ 3. Tracing in Python
+
+Tracing means tracking program execution step-by-step.
+
+ Method 1: Using print statements
+
+def add(a, b):
+    print("Inside add()")
+    return a + b
+
+print("Program Started")
+result = add(10, 20)
+print(result)
+
+
+---
+
+ Method 2: Using logging (recommended)
+
+
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
+def calculate():
+    logging.info("Calculation started")
+    result = 10 + 20
+    logging.info(f"Result = {result}")
+
+calculate()
+
+
+---
+
+ Method 3: Using traceback
+
+Useful for debugging exceptions.
+
+
+import traceback
+
+try:
+    10 / 0
+except Exception:
+
+
+Output:
+
+Traceback (most recent call last):
+  ...
+ZeroDivisionError: division by zero
+
+
+---
+
+ Interview Summary
+
+DEBUG    -> Developer debugging information
+INFO     -> Normal application events
+WARNING  -> Something suspicious
+ERROR    -> Operation failed
+CRITICAL -> Application may stop
+
+try      -> Code that may fail
+except   -> Handle exception
+finally  -> Always executes
+
+Tracing   -> Track execution flow
+Logging   -> Production-grade tracing
+traceback -> Detailed error stack
+
+
